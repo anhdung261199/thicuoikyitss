@@ -1,38 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
-import React, {Component} from 'react'
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {value : ''};
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
-
-  handleSubmit(event) {
-    alert('Your favorite flavor is: ' + this.state.value);
-    event.preventDefault();
-  }
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Pick your favorite flavor:
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
-          </select>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
+import React,{useState} from 'react';
+function App() {
+    const [point,setPoint] = useState(1);
+    const [name,setName] = useState("Huyen");
+    const [data,setData] = useState(["Huyen","Hoa","Hung","Long"])
+  return (
+    <div style={{margin:20}}>
+       <div style={{marginBottom:20}}>
+           学生一覧： [Huyen,Hoa,Hung,Long]
+       </div>
+        <div style={{marginBottom:20}}>
+            位置： {point}
+        </div>
+        <div style={{marginBottom:20}}>
+            名前 : {name}
+        </div>
+        <div>
+            <button onClick={()=>{if((point+1)%4 !=0)
+            {setPoint((point+1)%4);setName(data[(point+1)%4-1])}
+            else {
+                setPoint(4);setName(data[3]);
+            }}}>
+                次に
+            </button>
+            <button style={{marginLeft:30}} onClick={()=>{if((point-1)%4 !=0)
+            {setPoint((point-1)%4);setName(data[(point-1)%4-1])}
+            else {
+                setPoint(4);setName(data[3]);
+            }}}>
+                前に
+            </button>
+        </div>
+    </div>
+  );
 }
 
 export default App;
